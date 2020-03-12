@@ -56,25 +56,27 @@
           :class="{ full: showBooks }"
           :pagination="true"
           :from="0"
-          :size="9"
+          :size="10"
           :showResultStats="false"
           className="result-list-container"
           :react="{ and: ['Ratings', 'Authors', 'title'] }"
           :innerClass="{ list: 'books-container', poweredBy: 'appbase' }"
         >
-          <div slot="renderItem" class="book-content" slot-scope="{ item }">
-            <div key="item._id">
-              <div class="image">
-                <img :src="item.image" alt="Book Cover" class="book-image" />
-                <div class="rating">{{ item.average_rating_rounded }} ⭐️</div>
-                <div class="details">
-                  <h4 class="book-header">{{ item.original_title }}</h4>
-                  <p>By {{ item.authors }}</p>
+          <div slot="renderItem" slot-scope="{ item }">
+            <div class="flex row book-content" key="item._id">
+              <img :src="item.image" alt="Book Cover" class="book-image" />
+              <div class="flex column justify-center ml20">
+                <div class="book-header">{{ item.original_title }}</div>
+                <div class="flex column justify-space-between">
+                  <div>by <span class="authors-list">{{ item.authors }}</span></div>
+                  <div class="book-bottom">
+                    <span class="pub-year">Pub {{item.original_publication_year}}     </span>
+                    <span class="rating">{{item.average_rating}} ⭐️</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
         </ReactiveList>
       </div>
     </ReactiveBase>
