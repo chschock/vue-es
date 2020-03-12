@@ -78,8 +78,8 @@ body {
 
 .book-content {
   flex-grow: 1;
-  width: 200px;
-  max-width: 250px;
+  width: 400px;
+  max-width: 450px;
   margin: 10px;
   transition: all ease 0.1s;
   overflow: hidden;
@@ -96,7 +96,7 @@ body {
 
 .rating {
   position: absolute;
-  left: 250px;
+  left: 450px;
   top: 0px;
   transition: all ease 0.2s;
   padding: 5px 8px;
@@ -110,7 +110,7 @@ body {
 
 .details {
   position: absolute;
-  left: -300px;
+  left: -500px;
   width: 100%;
   bottom: 0;
   border-radius: 2px;

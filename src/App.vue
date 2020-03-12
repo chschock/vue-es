@@ -56,7 +56,7 @@
           :class="{ full: showBooks }"
           :pagination="true"
           :from="0"
-          :size="16"
+          :size="9"
           :showResultStats="false"
           className="result-list-container"
           :react="{ and: ['Ratings', 'Authors', 'title'] }"
@@ -74,6 +74,7 @@
               </div>
             </div>
           </div>
+
         </ReactiveList>
       </div>
     </ReactiveBase>
