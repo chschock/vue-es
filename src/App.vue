@@ -62,7 +62,7 @@
           :react="{ and: ['Ratings', 'Authors', 'title'] }"
           :innerClass="{ list: 'books-container', poweredBy: 'appbase' }"
         >
-          <div slot="onData" class="book-content" slot-scope="{ item }">
+          <div slot="renderItem" class="book-content" slot-scope="{ item }">
             <div key="item._id">
               <div class="image">
                 <img :src="item.image" alt="Book Cover" class="book-image" />
