@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <ReactiveBase
-      app="good-books-yj"
-      credentials="gBgUqs2tV:3456f3bf-ea9e-4ebc-9c93-08eb13e5c87c"
+      app="books"
+      url="http://127.0.0.1:9200"
     >
       <div class="navbar">
         <h2>📚Book<span>Search</span></h2>
@@ -11,11 +11,11 @@
           iconPosition="right"
           :dataField="[
             'original_title',
-            'original_title.raw',
             'original_title.search',
+            'original_title.autosuggest',
             'authors',
-            'authors.raw',
-            'authors.search'
+            'authors.search',
+            'authors.autosuggest',
           ]"
           className="data-search"
           :showClear="false"
@@ -31,7 +31,7 @@
         <div class="filters-container" :class="{ full: !showBooks }">
           <MultiList
             componentId="Authors"
-            dataField="authors.raw"
+            dataField="authors.keyword"
             class="filter"
             title="Select Authors"
             selectAllLabel="All Authors"
@@ -52,7 +52,7 @@
 
         <ReactiveList
           componentId="SearchResult"
-          dataField="original_title.raw"
+          dataField="original_title.keyword"
           :class="{ full: showBooks }"
           :pagination="true"
           :from="0"
