@@ -37,7 +37,7 @@
             selectAllLabel="All Authors"
             :react="{ and: ['Ratings', 'title'] }"
           />
-          <SingleRange
+          <MultiRange
             componentId="Ratings"
             dataField="average_rating"
             :data="[
@@ -58,12 +58,46 @@
             componentId="SearchResult"
             dataField="original_title.keyword"
             :pagination="true"
+            :pages="10"
             :from="0"
             :size="10"
-            :showResultStats="false"
+            :showEndPage="true"
+            :showResultStats="true"
             className="result-list-container"
             :react="{ and: ['Ratings', 'Authors', 'title'] }"
             :innerClass="{ list: 'foo', poweredBy: 'appbase' }"
+            :sortOptions="[
+              {
+                label: 'Best Match',
+                dataField: '_score',
+                sortBy: 'desc'
+              },
+              {
+                label: 'Most Ratings',
+                dataField: 'ratings_count',
+                sortBy: 'desc'
+              },
+              {
+                label: 'Most Stars',
+                dataField: 'average_rating',
+                sortBy: 'desc'
+              },
+              {
+                label: 'Fewest Stars',
+                dataField: 'average_rating',
+                sortBy: 'asc'
+              },
+              {
+                label: 'Publication year',
+                dataField: 'original_publication_year',
+                sortBy: 'desc'
+              },
+              {
+                label: 'Number of books',
+                dataField: 'books_count',
+                sortBy: 'desc'
+              },
+            ]"
           >
             <div slot="renderItem" slot-scope="{ item }">
               <div class="flex book-content" key="item._id">
@@ -74,7 +108,7 @@
                     <div>by <span class="authors-list">{{ item.authors }}</span></div>
                     <div class="book-bottom">
                       <span class="pub-year">Pub {{item.original_publication_year}}     </span>
-                      <span class="rating">{{item.average_rating}} ⭐️</span>
+                      <span class="rating">{{item.average_rating}} ⭐️ ({{Math.floor(item.ratings_count / 1000)}}k)</span>
                     </div>
                   </div>
                 </div>
