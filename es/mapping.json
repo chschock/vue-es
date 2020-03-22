@@ -1,0 +1,252 @@
+{
+  "aliases" : { },
+  "mappings" : {
+    "properties" : {
+      "authors" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "english" : {
+            "type" : "text",
+            "analyzer" : "english"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          },
+          "search" : {
+            "type" : "text",
+            "analyzer" : "ngram_analyzer",
+            "search_analyzer" : "simple"
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "average_rating" : {
+        "type" : "float"
+      },
+      "average_rating_rounded" : {
+        "type" : "integer"
+      },
+      "books_count" : {
+        "type" : "integer"
+      },
+      "id" : {
+        "type" : "integer"
+      },
+      "image" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "image_medium" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "isbn" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "language_code" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "original_publication_year" : {
+        "type" : "integer"
+      },
+      "original_series" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "original_title" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "english" : {
+            "type" : "text",
+            "analyzer" : "english"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          },
+          "search" : {
+            "type" : "text",
+            "analyzer" : "ngram_analyzer",
+            "search_analyzer" : "simple"
+          }
+        },
+        "analyzer" : "standard"
+      },
+      "ratings_count" : {
+        "type" : "integer"
+      },
+      "title" : {
+        "type" : "text",
+        "fields" : {
+          "autosuggest" : {
+            "type" : "text",
+            "analyzer" : "autosuggest_analyzer",
+            "search_analyzer" : "simple"
+          },
+          "english" : {
+            "type" : "text",
+            "analyzer" : "english"
+          },
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          },
+          "search" : {
+            "type" : "text",
+            "analyzer" : "ngram_analyzer",
+            "search_analyzer" : "simple"
+          }
+        },
+        "analyzer" : "standard"
+      }
+    }
+  },
+  "settings" : {
+    "index" : {
+      "max_ngram_diff" : "10",
+      "number_of_replicas" : "1",
+      "number_of_shards" : "1",
+      "analysis" : {
+        "filter" : {
+          "autosuggest_filter" : {
+            "token_chars" : [
+              "letter",
+              "digit",
+              "punctuation",
+              "symbol"
+            ],
+            "min_gram" : "1",
+            "type" : "edge_ngram",
+            "max_gram" : "20"
+          },
+          "ngram_filter" : {
+            "token_chars" : [
+              "letter",
+              "digit",
+              "punctuation",
+              "symbol"
+            ],
+            "min_gram" : "2",
+            "type" : "ngram",
+            "max_gram" : "9"
+          }
+        },
+        "analyzer" : {
+          "whitespace_analyzer" : {
+            "filter" : [
+              "lowercase",
+              "asciifolding"
+            ],
+            "type" : "whitespace",
+            "tokenizer" : "whitespace"
+          },
+          "ngram_analyzer" : {
+            "filter" : [
+              "lowercase",
+              "asciifolding",
+              "ngram_filter"
+            ],
+            "type" : "custom",
+            "tokenizer" : "standard"
+          },
+          "standard_analyzer" : {
+            "filter" : [
+              "lowercase",
+              "asciifolding"
+            ],
+            "type" : "custom",
+            "tokenizer" : "standard"
+          },
+          "autosuggest_analyzer" : {
+            "filter" : [
+              "lowercase",
+              "asciifolding",
+              "autosuggest_filter"
+            ],
+            "type" : "custom",
+            "tokenizer" : "standard"
+          },
+          "body_analyzer" : {
+            "filter" : [
+              "lowercase",
+              "asciifolding",
+              "stop",
+              "snowball",
+              "word_delimiter"
+            ],
+            "type" : "custom",
+            "tokenizer" : "standard"
+          }
+        }
+      }
+    }
+  }
+}

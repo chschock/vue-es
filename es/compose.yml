@@ -1,0 +1,46 @@
+version: '3'
+services:
+    # search engine
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+        container_name: elasticsearch
+        environment:
+            - discovery.type=single-node
+            - http.port=9200
+            - http.cors.enabled=true
+            - http.cors.allow-origin=/https?:\/\/(localhost)?(127.0.0.1)?(:[0-9]+)?/
+            - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization,Access-Control-Allow-Headers,Accept
+            - http.cors.allow-credentials=true
+            - bootstrap.memory_lock=true
+            - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+        ports:
+            - '9200:9200'
+            - '9300:9300'
+        networks:
+            - elastic
+    # elasticsearch browser
+    dejavu:
+        image: appbaseio/dejavu:latest
+        container_name: dejavu
+        ports:
+            - '1358:1358'
+        stop_grace_period: 1s
+        links:
+            - elasticsearch
+        networks:
+            - elastic
+    kibana:
+        image: docker.elastic.co/kibana/kibana:7.6.1
+        container_name: kibana
+        ports:
+            - '5601:5601'
+        links:
+            - elasticsearch
+        networks:
+            - elastic
+        environment:
+          SERVER_NAME: localhost
+          ELASTICSEARCH_URL: http://elasticsearch:9200/
+
+networks:
+    elastic:
